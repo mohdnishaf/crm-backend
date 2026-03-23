@@ -18,21 +18,36 @@ const controller = require("../controllers/employee.controller");
  *       required:
  *         - name
  *         - mail
+ *         - gender
+ *         - birthday
+ *         - position
+ *         - level
  *       properties:
  *         name:
  *           type: string
+ *           example: Musaddik
  *         mail:
  *           type: string
+ *           example: musaddik@mail.com
  *         gender:
  *           type: string
- *         dob:
+ *           enum: [male, female, other]
+ *           example: male
+ *         birthday:
  *           type: string
- *         designation:
+ *           format: date
+ *           example: 1998-05-20
+ *         position:
  *           type: string
+ *           example: Software Developer
  *         level:
  *           type: string
- *         status:
- *           type: string
+ *           enum: [junior, mid, senior]
+ *           example: junior
+ *         fullAge:
+ *           type: number
+ *           example: 27
+ *           readOnly: true
  */
 
 /**
@@ -49,7 +64,11 @@ const controller = require("../controllers/employee.controller");
  *             $ref: '#/components/schemas/Employee'
  *     responses:
  *       201:
- *         description: Employee created
+ *         description: Employee created successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Employee'
  */
 router.post("/", controller.createEmployee);
 
@@ -62,6 +81,12 @@ router.post("/", controller.createEmployee);
  *     responses:
  *       200:
  *         description: Employee list
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Employee'
  */
 router.get("/", controller.getEmployees);
 
@@ -77,9 +102,15 @@ router.get("/", controller.getEmployees);
  *         required: true
  *         schema:
  *           type: string
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/Employee'
  *     responses:
  *       200:
- *         description: Employee updated
+ *         description: Employee updated successfully
  */
 router.put("/:id", controller.updateEmployee);
 
@@ -97,7 +128,7 @@ router.put("/:id", controller.updateEmployee);
  *           type: string
  *     responses:
  *       200:
- *         description: Employee deleted
+ *         description: Employee deleted successfully
  */
 router.delete("/:id", controller.deleteEmployee);
 

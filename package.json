@@ -1,34 +1,22 @@
 {
   "name": "crm-backend",
   "version": "1.0.0",
-<<<<<<< HEAD
   "description": "",
   "main": "server.js",
   "scripts": {
     "start": "nodemon server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
-=======
-  "main": "server.js",
-  "scripts": {
-    "start": "nodemon server.js"
->>>>>>> 34bbefa9d746eb0963146424b3cf50b5c9b58f07
   },
   "dependencies": {
     "cors": "^2.8.6",
-<<<<<<< HEAD
-    "express": "^5.2.1",
-    "mongoose": "^9.2.0",
-    "swagger-jsdoc": "^6.2.8",
-    "swagger-ui-express": "^5.0.1"
-=======
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
     "mongoose": "^8.0.0",
+    "mongoose-migrate": "^0.2.4",
     "swagger-jsdoc": "^6.2.8",
     "swagger-ui-express": "^5.0.1"
   },
   "devDependencies": {
     "nodemon": "^3.1.11"
->>>>>>> 34bbefa9d746eb0963146424b3cf50b5c9b58f07
   }
 }

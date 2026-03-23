@@ -1,49 +1,22 @@
-<<<<<<< HEAD
-const swaggerUi = require('swagger-ui-express');
-const swaggerJsdoc = require('swagger-jsdoc');
-
-function setupSwagger(app) {
-  const options = {
-    definition: {
-      openapi: '3.0.0',
-      info: {
-        title: 'CRM Backend API',
-        version: '1.0.0',
-      },
-      servers: [
-        {
-          url: 'http://localhost:3000',
-        },
-      ],
-    },
-    apis: ['./routes/*.js'], // reads swagger comments from routes
-  };
-
-  const swaggerSpec = swaggerJsdoc(options);
-
-  app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
-}
-
-module.exports = setupSwagger;
-=======
-const swaggerJSDoc = require("swagger-jsdoc");
+const swaggerJsdoc = require("swagger-jsdoc");
 
 const options = {
   definition: {
     openapi: "3.0.0",
     info: {
-      title: "CRM Employee API",
+      title: "CRM API",
       version: "1.0.0",
-      description: "Employee CRUD APIs for CRM Project"
+      description: "CRM Backend API Documentation",
     },
     servers: [
       {
-        url: "http://localhost:3000"
-      }
-    ]
+        url: "http://localhost:5000",
+      },
+    ],
   },
-  apis: ["./routes/*.js"] // VERY IMPORTANT
+  apis: ["./routes/*.js"], 
 };
 
-module.exports = swaggerJSDoc(options);
->>>>>>> 34bbefa9d746eb0963146424b3cf50b5c9b58f07
+const swaggerSpec = swaggerJsdoc(options);
+
+module.exports = swaggerSpec;

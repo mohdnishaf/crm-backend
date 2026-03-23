@@ -1,16 +1,47 @@
 const mongoose = require("mongoose");
 
 const employeeSchema = new mongoose.Schema(
-  {
-    name: { type: String, required: true },
-    mail: { type: String, required: true, unique: true },
-    gender: { type: String, enum: ["Male", "Female", "Other"] },
-    dob: { type: Date },
-    designation: { type: String },
-    level: { type: String, default: "Middle" }, // UI shows Middle
-    status: { type: String, default: "Active" }
+{
+  name: {
+    type: String,
+    required: true,
+    trim: true
   },
-  { timestamps: true }
+
+  mail: {
+    type: String,
+    required: false,
+    lowercase: true,
+    trim: true
+  },
+
+  gender: {
+    type: String,
+    enum: ["male", "female", "other"],
+    required: false,
+    lowercase: true
+  },
+
+  birthday: {
+    type: Date,
+    required: false
+  },
+
+  position: {
+    type: String,
+    required: false,
+    trim: true
+  },
+
+  level: {
+    type: String,
+    enum: ["junior", "mid", "senior"],
+    required: false,
+    lowercase: true
+  }
+},
+
 );
+
 
 module.exports = mongoose.model("Employee", employeeSchema);
