@@ -5,12 +5,11 @@
  *   description: Project management APIs
  */
 
-const express = require('express');
+const express = require("express");
 const router = express.Router();
+const projectController = require("../controllers/projectController");
 
-const projectController = require('../controllers/projectController');
 
-router.post('/', projectController.createProject);
 /**
  * @swagger
  * /api/projects:
@@ -26,14 +25,20 @@ router.post('/', projectController.createProject);
  *             properties:
  *               name:
  *                 type: string
+ *               assignee:
+ *                 type: string
+ *               priority:
+ *                 type: string
+ *                 enum: [Low, Medium, High]
  *               description:
  *                 type: string
  *     responses:
- *       200:
- *         description: Project created
+ *       201:
+ *         description: Project created successfully
  */
+router.post("/", projectController.createProject);
 
-router.get('/', projectController.getProjects);
+
 /**
  * @swagger
  * /api/projects:
@@ -44,8 +49,9 @@ router.get('/', projectController.getProjects);
  *       200:
  *         description: List of projects
  */
+router.get("/", projectController.getProjects);
 
-router.put('/:id', projectController.updateProject);
+
 /**
  * @swagger
  * /api/projects/{id}:
@@ -58,12 +64,28 @@ router.put('/:id', projectController.updateProject);
  *         required: true
  *         schema:
  *           type: string
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               name:
+ *                 type: string
+ *               assignee:
+ *                 type: string
+ *               priority:
+ *                 type: string
+ *               description:
+ *                 type: string
  *     responses:
  *       200:
  *         description: Project updated
  */
+router.put("/:id", projectController.updateProject);
 
-router.delete('/:id', projectController.deleteProject);
+
 /**
  * @swagger
  * /api/projects/{id}:
@@ -80,7 +102,7 @@ router.delete('/:id', projectController.deleteProject);
  *       200:
  *         description: Project deleted
  */
+router.delete("/:id", projectController.deleteProject);
 
 
 module.exports = router;
-
