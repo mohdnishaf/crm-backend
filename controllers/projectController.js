@@ -2,13 +2,14 @@ const Project = require('../models/Project');
 
 // CREATE
 exports.createProject = async (req, res) => {
-   try {
-      const event = await Project.create(req.body);
-      res.status(201).json(event);
-    } catch (error) {
-      res.status(400).json({ message: error.message });
-    }
-  };
+  try {
+    const project = new Project(req.body);
+    const saved = await project.save();
+    res.json(saved);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
 
 // GET ALL
 exports.getProjects = async (req, res) => {

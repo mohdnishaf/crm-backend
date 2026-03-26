@@ -1,6 +1,14 @@
 const express = require("express");
 const router = express.Router();
 const controller = require("../controllers/calendar.controller");
+
+/**
+ * @swagger
+ * tags:
+ *   name: Calendar
+ *   description: Calendar Event API
+ */
+
 /**
  * @swagger
  * /api/calendar:
@@ -16,28 +24,22 @@ const controller = require("../controllers/calendar.controller");
  *             required:
  *               - title
  *               - date
+ *               - duration
  *             properties:
  *               title:
  *                 type: string
  *                 example: Team Meeting
- *               description:
- *                 type: string
- *                 example: Discuss project updates
  *               date:
  *                 type: string
- *                 format: date-time
- *                 example: 2026-02-12T10:00:00Z
- *               startTime:
+ *                 format: date
+ *                 example: 2026-03-15
+ *               duration:
  *                 type: string
- *                 example: 10:00 AM
- *               endTime:
- *                 type: string
- *                 example: 11:00 AM
+ *                 example: 2 hours
  *     responses:
  *       201:
  *         description: Event created successfully
  */
-
 router.post("/", controller.createEvent);
 
 /**
@@ -46,6 +48,9 @@ router.post("/", controller.createEvent);
  *   get:
  *     summary: Get all calendar events
  *     tags: [Calendar]
+ *     responses:
+ *       200:
+ *         description: List of all calendar events
  */
 router.get("/", controller.getEvents);
 
@@ -61,9 +66,24 @@ router.get("/", controller.getEvents);
  *         required: true
  *         schema:
  *           type: string
+ *         description: Event ID
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               title:
+ *                 type: string
+ *               date:
+ *                 type: string
+ *                 format: date
+ *               duration:
+ *                 type: string
  *     responses:
  *       200:
- *         description: Event updated
+ *         description: Event updated successfully
  */
 router.put("/:id", controller.updateEvent);
 
@@ -79,9 +99,10 @@ router.put("/:id", controller.updateEvent);
  *         required: true
  *         schema:
  *           type: string
+ *         description: Event ID
  *     responses:
  *       200:
- *         description: Event deleted
+ *         description: Event deleted successfully
  */
 router.delete("/:id", controller.deleteEvent);
 
