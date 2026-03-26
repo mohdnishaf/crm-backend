@@ -13,9 +13,6 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// DB
-connectDB();
-
 // Routes
 app.use("/api/employees", require("./routes/employee.routes"));
 app.use("/api/calendar", require("./routes/calendar.routes"));
@@ -32,8 +29,14 @@ app.get("/", (req, res) => {
 
 const PORT = process.env.PORT || 5000;
 
-// IMPORTANT: Bind to 0.0.0.0 for Render
-app.listen(PORT, "0.0.0.0", () => {
-  console.log(`🚀 Server running on port ${PORT}`);
-});
-  
+// Connect DB first, then start server
+connectDB()
+  .then(() => {
+    app.listen(PORT, "0.0.0.0", () => {
+      console.log(`🚀 Server running on port ${PORT}`);
+    });
+  })
+  .catch((err) => {
+    console.error("❌ Failed to start server:", err.message);
+    process.exit(1);
+  });
